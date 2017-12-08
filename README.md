@@ -6,7 +6,7 @@ However, sometimes accuracy of this approach is not satisfactory. Also it is usu
 
 In this code I use multiple `cv2.inRange` calls in different regions of color space:  
 ![](Figure_1.png)  
-*Points (colors) in {H,S,V} coordinates*
+*Points represent colors in {H,S,V} coordinates. Boxes represent ranges.*
 
 **How it works**
 
