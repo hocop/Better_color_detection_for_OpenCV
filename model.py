@@ -106,6 +106,7 @@ def get_mask(img):
 	for c, r, v in zip(model_centers, model_radii, model_vectors):
 		dist = img - c
 		mask += cv2.inRange(np.abs(dist), np.array([0.,0.,0.]), v*r)
+	mask = cv2.inRange(mask, 0.5, 256*len(model_centers))
 	return mask
 
 
