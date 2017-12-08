@@ -7,15 +7,15 @@ However, sometimes accuracy of this approach is not satisfactory. Also it is usu
 In this code I use multiple `cv2.inRange` calls in different regions of color space:  
 ![Points in HSV color space](Figure_1.png)
 
-#How it works
+**How it works**
 To define these multiple ranges I have written code which optimizes this choice using pre-collected data.  
 To collect color data from input images, launch `collect_data.py` and click left mouse key on colors which you need. To collect negative data points use middle mouse button. Negative points have no effect on color detecting, they are needed only if you want to see them on the plot.
 
-#Testing
+**Testing**
 For images present here, dataset is already collected, just launch `test.py` to see how it works.  
 To test on your own images, load them to `input_data` folder, delete `color_dataset`, launch `collect_data.py` and collect your points. Then launch `test.py`.
 
-#Usage
+**Usage**
 To use this code in your project you will need only `model.py`.  
 ```Python
 from model import *
