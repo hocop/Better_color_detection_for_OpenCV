@@ -10,6 +10,7 @@ dim = 3
 model_centers = []
 model_radii = []
 model_vectors = []
+model_ranges = []
 
 # training function
 def train(points):
@@ -100,12 +101,15 @@ def train(points):
 		model_centers.append(c)
 		model_radii.append(r)
 		model_vectors.append(v)
+	for c, r, v in zip(model_centers, model_radii, model_vectors):
+		lower = c - r * v
+		upper = c + r * v
+		model_ranges.append( (lower,upper) )
 
 def get_mask(img):
 	mask = np.zeros(img.shape[:2])
-	for c, r, v in zip(model_centers, model_radii, model_vectors):
-		dist = img - c
-		mask += cv2.inRange(np.abs(dist), np.array([0.,0.,0.]), v*r)
+	for lower, upper in model_ranges:
+		mask += cv2.inRange(img, lower, upper)
 	mask = cv2.inRange(mask, 0.5, 256*len(model_centers))
 	return mask
 
