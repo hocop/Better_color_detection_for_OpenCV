@@ -5,7 +5,8 @@ When we detect color on the image in opencv we use `cv2.inRange` function.
 However, sometimes accuracy of this approach is not satisfactory. Also it is usually difficult to define the range.
 
 In this code I use multiple `cv2.inRange` calls in different regions of color space:  
-![Points in HSV color space](Figure_1.png)
+![](Figure_1.png)
+*Points (colors) in {H,S,V} coordinates*
 
 **How it works**
 
