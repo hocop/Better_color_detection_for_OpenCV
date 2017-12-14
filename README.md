@@ -45,6 +45,7 @@ mask = cd_green.get_mask(image)
 ```
 Now you have binary mask of image.  
 
+**Analysis**  
 To see which ranges were created, write:
 ```Python
 print(cd_green.ranges)
