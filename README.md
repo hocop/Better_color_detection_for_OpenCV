@@ -11,13 +11,20 @@ In this code I use multiple `cv2.inRange` calls in different regions of color sp
 
 **How it works**
 
-To define these multiple ranges I have written code which optimizes this choice using pre-collected data.  
-To collect color data from input images, launch `collect_color_data.py` and click left mouse key on colors which you need. To collect negative data points use middle mouse button. Negative points have no effect on color detecting, they are needed only if you want to see them on the plot.
+This code uses pre-collected data. A simple heuristic algorithm is used here to define boxes (ranges) which fit most of the points.  
+Basically you click on desired colors and then they are detected.
 
 **Testing**
 
-For images present here, dataset is already collected, just launch `test.py` to see how it works.  
-To test on your own images, load them to `input_data` folder, delete `color_dataset`, launch `collect_data.py` and collect your points. Then launch `test.py`.
+For images present here, dataset is already collected, just launch `test.py` to see how it works.
+
+**Collecting your own color dataset**
+
+Put your sample images to `input_data` folder.  
+Make sure that `color_dataset` file is empty or deleted: this code will append samples to it.  
+Run `collect_data.py`.  
+Images will appear on the screen. Click left mouse button on points that contain color you want to detect.  
+Click middle mouse button on colors which you don't want to detect. Negative points will not affect ranges. They are only needed if you want to see them on plot as showed above.
 
 **Usage**
 
