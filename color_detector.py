@@ -15,7 +15,29 @@ class ColorDetector:
 		self.ranges = []
 		
 		if points is not None:
-			self.train(points)
+			if type(points)==str:
+				# prepare arrays: positive and negative HSV points
+				hp, sp, vp = [], [], []
+				hn, sn, vn = [], [], []
+				positives = []
+				negatives = []
+
+				# read data
+				for line in open(points).readlines():
+					h, s, v, result = map(float, line[:-1].split('\t'))
+					if result > 0.5:
+						hp.append(h)
+						sp.append(s)
+						vp.append(v)
+						positives.append([h,s,v])
+					else:
+						hn.append(h)
+						sn.append(s)
+						vn.append(v)
+						negatives.append([h,s,v])
+			else:
+				positives = points
+			self.train(positives)
 	
 	# training function
 	def train(self, points):

@@ -29,7 +29,7 @@ for line in open('color_dataset').readlines():
 		negatives.append([h,s,v])
 
 # train model
-cd_green = ColorDetector(positives)
+cd_green = ColorDetector('color_dataset')
 
 # read pictures
 path = 'input_data/'

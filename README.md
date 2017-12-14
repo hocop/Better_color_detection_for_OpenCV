@@ -25,19 +25,9 @@ To use this code in your project you will need only `color_detector.py`.
 ```Python
 from color_detector import ColorDetector
 ```
-Load color dataset from file:
-```Python
-# init array
-positives = []
-# read data
-for line in open('color_dataset').readlines():
-	h, s, v, result = map(float, line[:-1].split('\t'))
-	if result > 0.5:
-		positives.append([h,s,v])
-```
 Use color dataset to create detector object:
 ```Python
-cd_green = ColorDetector(positives)
+cd_green = ColorDetector('color_dataset')
 ```
 *That's it!* Now to use the detector, call `get_mask`:
 ```Python
