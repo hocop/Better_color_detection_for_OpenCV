@@ -2,10 +2,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 from mpl_toolkits.mplot3d.art3d import Poly3DCollection
-from model import *
 import cv2
 from os import listdir
 from os.path import isfile, join
+
+from color_detector import ColorDetector
 
 # prepare arrays: positive and negative HSV points
 hp, sp, vp = [], [], []
@@ -28,9 +29,7 @@ for line in open('color_dataset').readlines():
 		negatives.append([h,s,v])
 
 # train model
-positives = np.array(positives)
-negatives = np.array(negatives)
-train(positives)
+cd_green = ColorDetector(positives)
 
 # read pictures
 path = 'input_data/'
@@ -40,7 +39,7 @@ for f in names:
 	img = cv2.imread(path+f)
 	img = cv2.resize(img, (400,400))
 	img = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
-	mask = get_mask(img)
+	mask = cd_green.get_mask(img)
 	cv2.imshow('mask',mask)
 	cv2.waitKey(1000)
 
@@ -52,7 +51,7 @@ ax.scatter(hp, sp, vp)
 leg = plt.legend(['negative','positive'])
 
 # draw cubes
-for c, r, vec in zip(model_centers, model_radii, model_vectors):
+for c, r, vec in zip(cd_green.centers, cd_green.radii, cd_green.vectors):
 	p1 = c-vec*r
 	Z = [p1, p1+np.array([r,0,0])*vec*2,p1+np.array([r,r,0])*vec*2
 			,p1+np.array([0,r,0])*vec*2,p1+np.array([0,0,r])*vec*2

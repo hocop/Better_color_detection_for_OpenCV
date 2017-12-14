@@ -12,7 +12,7 @@ In this code I use multiple `cv2.inRange` calls in different regions of color sp
 **How it works**
 
 To define these multiple ranges I have written code which optimizes this choice using pre-collected data.  
-To collect color data from input images, launch `collect_data.py` and click left mouse key on colors which you need. To collect negative data points use middle mouse button. Negative points have no effect on color detecting, they are needed only if you want to see them on the plot.
+To collect color data from input images, launch `collect_color_data.py` and click left mouse key on colors which you need. To collect negative data points use middle mouse button. Negative points have no effect on color detecting, they are needed only if you want to see them on the plot.
 
 **Testing**
 
@@ -21,11 +21,11 @@ To test on your own images, load them to `input_data` folder, delete `color_data
 
 **Usage**
 
-To use this code in your project you will need only `model.py`.  
+To use this code in your project you will need only `color_detector.py`.  
 ```Python
-from model import *
+from color_detector import ColorDetector
 ```
-Load dataset from file:
+Load color dataset from file:
 ```Python
 # init array
 positives = []
@@ -34,14 +34,22 @@ for line in open('color_dataset').readlines():
 	h, s, v, result = map(float, line[:-1].split('\t'))
 	if result > 0.5:
 		positives.append([h,s,v])
-positives = np.array(positives)
 ```
-And train model:
+Use color dataset to create detector object:
 ```Python
-train(positives)
+cd_green = ColorDetector(positives)
 ```
-That's it! Now to use the code, call `get_mask`:
+*That's it!* Now to use the detector, call `get_mask`:
 ```Python
-mask = get_mask(image)
+mask = cd_green.get_mask(image)
 ```
-Now you have binary mask of image.
+Now you have binary mask of image.  
+
+To see which ranges were created, write:
+```Python
+print(cd_green.ranges)
+```
+output is a list of two (in this example) ranges:
+```Python
+[(array([  27.28966087,  160.95680175,   24.2726661 ]), array([  45.71033913,  226.04319825,   96.7273339 ])), (array([  27.12217638,  106.1456087 ,   24.15146678]), array([  47.87782362,  170.8543913 ,   99.84853322]))]
+```
