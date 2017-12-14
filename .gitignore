@@ -1,3 +1,5 @@
 model*
 color_dataset?*
 visu*
+*.pyc
+__pycache__
