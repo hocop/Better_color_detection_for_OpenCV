@@ -32,7 +32,7 @@ To use this code in your project you will need only `color_detector.py`.
 ```Python
 from color_detector import ColorDetector
 ```
-Use color dataset to create detector object:
+Use color dataset from file 'color_dataset' to create detector object:
 ```Python
 cd_green = ColorDetector('color_dataset')
 ```
@@ -48,7 +48,15 @@ To see which ranges were created, write:
 ```Python
 print(cd_green.ranges)
 ```
-output is a list of two (in this example) ranges:
+output is a list of two (in this example) ranges (they can be seen as boxes on the above picture):
 ```Python
 [(array([  27.28966087,  160.95680175,   24.2726661 ]), array([  45.71033913,  226.04319825,   96.7273339 ])), (array([  27.12217638,  106.1456087 ,   24.15146678]), array([  47.87782362,  170.8543913 ,   99.84853322]))]
+```
+
+**Alternative usage**
+
+If you already have ranges, you can use them as follows:
+```Python
+cd_green = ColorDetector()
+cd_green.ranges = [(lower1, upper1), (lower2,upper2)] # where lowerI and upperI are numpy arrays representing colors
 ```
