@@ -1,6 +1,6 @@
 **Advanced color detecting tool for OpenCV**
 
-When we detect color on the image in opencv we use `cv2.inRange` function like in this tutorial:  
+When we detect color on an image in opencv we use `cv2.inRange` function like in this tutorial:  
 *https://henrydangprg.com/2016/06/26/color-detection-in-python-with-opencv/*
 
 However, sometimes accuracy of this approach is not satisfactory. Also it is usually difficult to define the range.
