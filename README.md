@@ -1,3 +1,7 @@
+<span style="color:red;">**WARNING:**</span> this code is very-very old. It will not work. Don't use it.
+
+----------------------------------------------------------
+
 **Advanced color detecting tool for OpenCV**
 
 When we detect color on an image in opencv we use `cv2.inRange` function like in this tutorial:  
